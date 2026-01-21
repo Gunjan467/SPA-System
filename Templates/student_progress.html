@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.progress-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+}
+
+.progress-card {
+    background: white;
+    width: 700px;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+}
+</style>
+
+<div class="progress-page">
+    <div class="progress-card">
+
+        <h4>📈 GPA Progress Over Semesters</h4>
+
+        <canvas id="gpaChart" height="120"></canvas>
+
+        <a href="/student-dashboard" class="btn btn-secondary mt-4">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+</div>
+
+<script>
+const semesters = [
+    {% for row in progress %}
+        "Sem {{ row.semester }}",
+    {% endfor %}
+];
+
+const gpas = [
+    {% for row in progress %}
+        {{ row.gpa }},
+    {% endfor %}
+];
+
+new Chart(document.getElementById('gpaChart'), {
+    type: 'line',
+    data: {
+        labels: semesters,
+        datasets: [{
+            label: 'GPA',
+            data: gpas,
+            tension: 0.4,
+            borderWidth: 3,
+            borderColor: '#7c3aed',
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                min: 0,
+                max: 10
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}

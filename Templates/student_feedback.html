@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+/* PAGE WRAPPER */
+.feedback-page {
+    padding-top: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+/* MAIN CARD – LESS COMPACT */
+.feedback-card {
+    background: #ffffff;
+    border-radius: 26px;
+
+    padding: 46px 56px;     /* ⬅ BIGGEST IMPACT (spacing) */
+    width: 640px;           /* ⬅ wider */
+    max-width: 92vw;
+
+    box-shadow: 0 20px 55px rgba(0,0,0,0.14);
+}
+
+/* TITLE */
+.feedback-card h3 {
+    font-size: 30px;
+    margin-bottom: 34px;
+    font-weight: 700;              /* ⬅ stronger */
+    color: #0f172a;                /* ⬅ dark slate (not pure black) */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.feedback-page {
+    padding-top: 120px;   /* ⬅ more space from top content */
+    position: relative;
+    z-index: 1;
+}
+
+.feedback-card {
+    position: relative;
+    z-index: 5;           /* ⬅ ensures it stays above charts */
+}
+
+
+/* EACH FEEDBACK ITEM */
+.feedback-item {
+    margin-bottom: 26px;   /* ⬅ vertical breathing */
+}
+
+/* SUBJECT NAME */
+.feedback-item h4 {
+    font-size: 19px;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+}
+
+/* FEEDBACK TEXT */
+.feedback-item p {
+    font-size: 16.5px;
+    line-height: 1.7;
+    margin-bottom: 6px;
+}
+
+/* TEACHER NAME */
+.feedback-item small {
+    font-size: 14.5px;
+    color: #555;
+}
+
+/* BACK BUTTON */
+.feedback-card .back-btn {
+    margin-top: 34px;
+    padding: 15px 28px;
+    font-size: 15.5px;
+    border-radius: 28px;
+}
+
+</style>
+
+<div class="feedback-card">
+    <h4>📝 Teacher Feedback</h4>
+
+    {% for f in feedbacks %}
+        <div class="feedback-item">
+            <strong>{{ f.subject }} :</strong><br>
+            {{ f.feedback }}<br>
+            <small>— {{ f.teacher_name }}</small>
+        </div>
+    {% endfor %}
+
+    <a href="/student-dashboard" class="btn btn-secondary">
+        ← Back to Dashboard
+    </a>
+</div>
+
+{% endblock %}

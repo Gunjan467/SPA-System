@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .hero-box {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 70px 50px;
+        text-align: center;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+    }
+
+    .hero-box h1 {
+        color: #2f3e46;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .tagline {
+        font-size: 20px;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 10px;
+    }
+
+    .sub-tagline {
+        font-size: 16px;
+        color: #4b5563;
+        margin-bottom: 35px;
+    }
+
+    .btn-soft-blue {
+        background-color: #9ecbff;
+        color: #0f172a;
+        border: none;
+    }
+
+    .btn-soft-purple {
+        background-color: #c7b8f5;
+        color: #2e1065;
+        border: none;
+    }
+
+    .btn-soft-blue:hover,
+    .btn-soft-purple:hover {
+        opacity: 0.85;
+    }
+
+    .home-footer {
+        margin-top: 50px;
+        font-size: 14px;
+        color: #6b7280;
+    }
+    .hero-btn {
+    padding: 16px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px; /* rectangle with soft corners */
+}
+
+</style>
+
+<div class="hero-box">
+   <h1>Transform Student Performance Data Into Actionable Insights !</h1>
+
+
+    <div class="sub-tagline">
+    Fast-track student progress with automated performance insights.<br>
+    <strong>SPA-System</strong> (Student Performance Analysis) is a smart platform for academic evaluation.
+</div>
+
+
+    <a href="/login" class="btn btn-soft-blue hero-btn m-2">
+    Get Started
+</a>
+
+<a href="#" class="btn btn-soft-purple hero-btn m-2">
+    Learn More
+</a>
+
+
+    <div class="home-footer">
+    The smartest way to measure growth.
+</div>
+
+</div>
+
+{% endblock %}

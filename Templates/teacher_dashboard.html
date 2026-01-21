@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.teacher-cards {
+    max-width: 1200px;
+    margin: 90px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Top row */
+.teacher-cards > .dashboard-card {
+    margin-right: 0;
+}
+
+/* Top row wrapper (3 cards) */
+.teacher-cards {
+    max-width: 1050px;
+    margin: 90px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 320px);
+    justify-content: center;
+    gap: 36px;
+}
+
+/* Bottom centered row */
+.bottom-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 20px;
+
+    /* Slightly reduced size */
+    width: 320px;
+    min-height: 175px;
+
+    padding: 30px 34px;
+
+    box-shadow: 0 22px 50px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.dashboard-card h5 {
+    font-size: 23px;        /* increased */
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+}
+
+.dashboard-card p {
+    font-size: 16.5px;     /* increased */
+    color: #374151;
+    line-height: 1.6;
+}
+
+/* Hover */
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+}
+
+</style>
+
+<div class="teacher-cards">
+
+    <!-- Row 1 -->
+    <div class="dashboard-card" onclick="location.href='/teacher/students'">
+        <h5>👥 Students</h5>
+        <p>View enrolled students</p>
+    </div>
+
+    <div class="dashboard-card" onclick="location.href='/teacher/marks'">
+        <h5>📝 Marks</h5>
+        <p>Add or update student marks</p>
+    </div>
+
+    <div class="dashboard-card" onclick="location.href='/teacher/attendance'">
+        <h5>📅 Attendance</h5>
+        <p>Mark student attendance</p>
+    </div>
+
+    <!-- Row 2 (centered manually) -->
+    <div class="bottom-row">
+        <div class="dashboard-card" onclick="location.href='/teacher/feedback'">
+            <h5>💬 Feedback</h5>
+            <p>Provide feedback to students</p>
+        </div>
+
+        <div class="dashboard-card" onclick="location.href='/teacher/class-analytics'">
+            <h5>📊 Class Analytics</h5>
+            <p>View class performance insights</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

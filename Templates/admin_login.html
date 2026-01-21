@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .admin-box {
+        max-width: 420px;
+        margin: auto;
+        padding: 40px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.85);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .error-msg {
+        color: #b91c1c;
+        background: #fee2e2;
+        padding: 8px;
+        border-radius: 6px;
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="admin-box">
+    <h3 class="text-center mb-4">Admin Control Panel Login</h3>
+
+    {% if error %}
+        <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Admin Username</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Admin Password</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button class="btn btn-primary w-100">Login</button>
+    </form>
+</div>
+
+{% endblock %}

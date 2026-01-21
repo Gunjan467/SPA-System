@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Marks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <style>
+        .teacher-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #fdf2f8);
+            display: flex;
+            justify-content: center;
+            padding-top: 90px;
+        }
+
+        .marks-wrapper {
+            max-width: 1200px;
+            margin: 60px auto;
+        }
+
+        .marks-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 28px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Pastel backgrounds */
+        .filter-card {
+            background: #EEF6FF;
+        }
+
+        .add-card {
+            background: #ECFDF3;
+        }
+
+        .update-card {
+            background: #FFF7ED;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .form-row input,
+        .form-row select {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            min-width: 180px;
+        }
+
+        .form-row button {
+            padding: 12px 22px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+
+        .form-row button.secondary {
+            background: #f97316;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #f3f4f6;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            background: #374151;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background: #111827;
+        }
+
+
+        .add-btn {
+            background: #86efac;
+            color: #065f46;
+            font-weight: 700;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        .add-btn:hover {
+            background: #4ade80;
+            transform: translateY(-1px);
+        }
+
+
+        th {
+            background: #f3f4f6;
+            font-weight: 700;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            text-align: center;
+            width: 90px;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4),
+        th:nth-child(5),
+        td:nth-child(5),
+        th:nth-child(6),
+        td:nth-child(6) {
+            text-align: center;
+        }
+
+        .marks-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: #3b82f6;
+            color: white;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .update-btn {
+            background: #fb923c;
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        .update-btn:hover {
+            background: #f97316;
+            transform: translateY(-1px);
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        }
+
+        .flash-wrapper {
+            margin-bottom: 22px;
+        }
+
+        .flash-msg {
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .flash-msg.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .flash-msg.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .delete-btn {
+    background: #fee2e2;
+    color: #991b1b;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.delete-btn:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+}
+/* CENTER ALIGN FOR ACTION COLUMNS */
+.center {
+    text-align: center;
+}
+
+/* COMMON BUTTON STYLE */
+.action-btn {
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+/* UPDATE BUTTON */
+.update-action {
+    background: #f3f4f6;
+    color: #111827;
+    border: 1px solid #9ca3af;
+}
+
+.update-action:hover {
+    background: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+/* DELETE BUTTON */
+.delete-action {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.delete-action:hover {
+    background: #fecaca;
+    transform: translateY(-1px);
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="teacher-page">
+        <div class="marks-wrapper">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-wrapper">
+                {% for category, msg in messages %}
+                <div class="flash-msg {{ category }}">{{ msg }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- FILTER SECTION -->
+            <div class="marks-card filter-card">
+                <div class="card-title">🔍 Filter Marks</div>
+
+                <form method="GET" class="form-row">
+                    <input type="text" name="search" placeholder="Search by Roll No or Name">
+
+                    <select name="subject">
+                        <option value="">All Subjects</option>
+                        {% for s in subjects %}
+                        <option value="{{ s }}">{{ s }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select name="semester">
+                        <option value="">All Semesters</option>
+                        {% for sem in semesters %}
+                        <option value="{{ sem }}">Semester {{ sem }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button type="submit" class="filter-btn">Filter</button>
+
+                </form>
+            </div>
+
+            <!-- ADD MARKS SECTION -->
+            <div class="marks-card add-card">
+                <div class="card-title">➕ Add Marks</div>
+
+                <form method="POST" class="form-row">
+                    <input type="hidden" name="mode" value="add">
+
+                    <input type="number" name="roll_no" placeholder="Roll No" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+
+                    <select name="semester" required>
+                        <option value="">Semester</option>
+                        <option value="1">Semester 1</option>
+                        <option value="2">Semester 2</option>
+                    </select>
+
+                    <input type="number" name="marks" placeholder="Marks" required>
+                    <input type="number" name="out_of" placeholder="Out Of" value="100" required>
+
+                    <button type="submit" class="add-btn">Add Marks</button>
+
+                </form>
+
+            </div>
+
+            <!-- UPDATE MARKS SECTION -->
+           <div class="marks-card update-card" id="updateSection">
+    <div class="card-title">✏️ Update Marks</div>
+
+    <form method="POST" class="form-row">
+        <input type="hidden" name="mode" value="update">
+
+        <select name="record_id" id="update_record" required>
+            <option value="">Select Record</option>
+            {% for m in marks %}
+            <option value="{{ m[0] }}">
+                Roll {{ m[1] }} - {{ m[3] }} (Sem {{ m[6] }})
+            </option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="marks" placeholder="New Marks" required>
+        <input type="number" name="out_of" placeholder="Out Of" required>
+
+        <button type="submit" class="update-btn">Update</button>
+    </form>
+</div>
+
+            <!-- TABLE -->
+            <div class="marks-card">
+                <div class="card-title">📊 Marks Records</div>
+
+                <table>
+                    <thead>
+    <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Out Of</th>
+        <th>Semester</th>
+        <th class="center">Update</th>
+        <th class="center">Remove</th>
+    </tr>
+</thead>
+
+                    <tbody>
+                        {% for m in marks %}
+                        <tr>
+                            <td>{{ m[1] }}</td>
+                            <td>{{ m[2] }}</td>
+                            <td>{{ m[3] }}</td>
+                            <td>{{ m[4] }}</td>
+                            <td>{{ m[5] }}</td>
+                            <td>{{ m[6] }}</td>
+                           <td class="center">
+    <button class="action-btn update-action"
+            onclick="quickUpdate('{{ m[0] }}')">
+        Update
+    </button>
+</td>
+
+<td class="center">
+    <form method="POST" style="display:inline;">
+        <input type="hidden" name="mode" value="delete">
+        <input type="hidden" name="mark_id" value="{{ m[0] }}">
+        <button type="submit"
+                class="action-btn delete-action"
+                onclick="return confirm('Delete this record?');">
+            Delete
+        </button>
+    </form>
+</td>
+
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="/teacher-dashboard" class="btn btn-secondary mt-3">
+                    ← Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+function quickUpdate(markId) {
+
+    const dropdown = document.getElementById('update_record');
+    dropdown.value = markId;
+
+    document.getElementById('updateSection')
+        .scrollIntoView({ behavior: "smooth" });
+
+    dropdown.focus();
+}
+</script>
+
+
+</body>
+
+</html>

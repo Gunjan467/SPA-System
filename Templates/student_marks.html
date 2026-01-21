@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.marks-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 75vh;
+    padding-top: 80px;
+}
+
+.marks-card {
+    background: white;
+    width: 520px; /* increased width */
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+}
+
+.marks-card h4 {
+    font-weight: 700;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn {
+    margin-top: 25px;
+}
+</style>
+
+<div class="marks-page">
+    <div class="marks-card">
+
+        <h4>📊 Your Academic Scores</h4>
+
+        <table class="table table-bordered mt-3">
+           <thead>
+    <tr>
+        <th>Semester</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Out of</th>
+    </tr>
+</thead>
+
+            <tbody>
+{% for row in marks %}
+<tr>
+    <td>Sem {{ row.semester }}</td>
+    <td>{{ row.subject }}</td>
+    <td>{{ row.marks }}</td>
+    <td>{{ row.out_of }}</td>
+</tr>
+{% endfor %}
+</tbody>
+        </table>
+        
+        <a href="/student-dashboard" class="btn btn-secondary back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+</div>
+
+{% endblock %}

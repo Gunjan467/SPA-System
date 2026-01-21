@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.gpa-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 75vh;
+    padding-top: 80px;
+}
+
+.gpa-card {
+    background: white;
+    width: 520px;
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.gpa-value {
+    font-size: 64px;
+    font-weight: 800;
+    color: #136bb9;
+    margin: 20px 0;
+}
+
+</style>
+
+<div class="gpa-page">
+    <div class="gpa-card">
+        <h4>🎓 GPA Overview</h4>
+
+        {% if gpa %}
+            <div class="gpa-value">{{ gpa }}</div>
+            <p>Your cumulative GPA based on your academic performance.</p>
+
+        {% else %}
+            <p>No marks available to calculate GPA</p>
+        {% endif %}
+
+        <a href="/student-dashboard" class="btn btn-secondary mt-4">
+            ← Back to Dashboard
+        </a>
+    </div>
+</div>
+
+{% endblock %}

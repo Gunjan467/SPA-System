@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    .dashboard-container {
+        max-width: 1100px;
+        margin: 40px auto;
+    }
+
+    .dashboard-title {
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .dashboard-card {
+        border-radius: 16px;
+        padding: 25px;
+        background: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card h5 {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="dashboard-container">
+
+    <div class="row g-4">
+
+
+        <div class="row g-4">
+
+            <!-- Marks -->
+            <div class="col-md-4">
+                <a href="/student/marks" style="text-decoration:none; color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>📊 Marks</h5>
+                        <p>View your subject-wise marks</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- GPA -->
+            <div class="col-md-4">
+                <a href="/student/gpa" style="text-decoration:none; color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>🎓 GPA</h5>
+                        <p>Check your GPA</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Attendance -->
+            <div class="col-md-4">
+                <a href="/student/attendance" style="text-decoration:none; color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>🧾 Attendance</h5>
+                        <p>View your attendance records</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Progress -->
+            <div class="col-md-4">
+                <a href="/student/progress" style="text-decoration:none;color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>📈 Track Your Progress</h5>
+                        <p>View your academic progress over time</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Teacher Feedback -->
+            <div class="col-md-4">
+                <a href="/student/feedback" style="text-decoration:none;color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>📝 Teacher Feedback</h5>
+                        <p>Read feedback from teachers</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Class Comparison -->
+            <div class="col-md-4">
+                <a href="/student/comparison" style="text-decoration:none;color:inherit;">
+                    <div class="dashboard-card">
+                        <h5>📉 Class Comparison</h5>
+                        <p>Compare your score with class average</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

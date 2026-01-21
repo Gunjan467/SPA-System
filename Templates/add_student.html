@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Add Student</h2>
+
+<form>
+    <div class="mb-3">
+        <label class="form-label">Student Name</label>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Roll Number</label>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Marks</label>
+        <input type="number" class="form-control">
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

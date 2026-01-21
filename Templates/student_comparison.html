@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+.comparison-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+}
+
+.comparison-card {
+    background: white;
+    width: 850px;             
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+}
+
+.comparison-card h4 {
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+canvas {
+    max-height: 420px;     
+}
+</style>
+
+<div class="comparison-page">
+    <div class="comparison-card">
+
+        <h4>📊 Class Comparison</h4>
+
+        <canvas id="compareChart"></canvas>
+
+        <a href="/student-dashboard" class="btn btn-secondary mt-4">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+</div>
+
+<script>
+const subjects = [{% for r in comparison %}"{{ r.subject }}",{% endfor %}];
+const student = [{% for r in comparison %}{{ r.student_avg }},{% endfor %}];
+const average = [{% for r in comparison %}{{ r.class_avg }},{% endfor %}];
+
+new Chart(document.getElementById('compareChart'), {
+    type: 'bar',
+    data: {
+        labels: subjects,
+        datasets: [
+            {
+                label: 'You',
+                data: student,
+                backgroundColor: '#7c3aed'
+            },
+            {
+                label: 'Class Average',
+                data: average,
+                backgroundColor: '#c4b5fd'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}
